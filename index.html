@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maukah Kamu Jadi Pacarku? ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ff758c);
+    background-size: 400% 400%;
+    animation: gradientBG 8s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+h1 {
+    color: #ff4d6d;
+}
+
+img {
+    width: 150px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+    background-color: #ff1e4d;
+}
+
+#noBtn {
+    background-color: #999;
+    color: white;
+    position: absolute;
+}
+
+.love {
+    font-size: 22px;
+    color: #ff4d6d;
+    margin-top: 20px;
+    display: none;
+    animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+}
+
+/* Animasi hati jatuh */
+.heart {
+    position: absolute;
+    top: -10px;
+    color: red;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <!-- GANTI FOTO DI SINI -->
+    <img src="https://i.imgur.com/4M34hi2.png" alt="Foto Kita">
+    
+    <h1>Maukah Kamu Jadi Pacarku? ❤️</h1>
+    
+    <button id="yesBtn">YES 💖</button>
+    <button id="noBtn">NO 🙈</button>
+    
+    <div class="love" id="loveText">
+        YAY!!! Sekarang kamu resmi jadi pacarku 😍💘
+    </div>
+</div>
+
+<!-- Musik (ganti link jika mau lagu lain) -->
+<audio id="bgMusic" autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const loveText = document.getElementById("loveText");
+let scale = 1;
+
+// Tombol NO kabur + mengecil
+noBtn.addEventListener("mouseover", function() {
+    const container = document.querySelector(".container");
+    const maxX = container.offsetWidth - noBtn.offsetWidth;
+    const maxY = container.offsetHeight - noBtn.offsetHeight;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+
+    scale -= 0.05;
+    if (scale > 0.3) {
+        noBtn.style.transform = "scale(" + scale + ")";
+    }
+});
+
+// Jika YES ditekan
+yesBtn.addEventListener("click", function() {
+    loveText.style.display = "block";
+    startHearts();
+});
+
+// Hati jatuh
+function startHearts() {
+    for (let i = 0; i < 50; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        document.body.appendChild(heart);
+    }
+}
+</script>
+
+</body>
+</html>
